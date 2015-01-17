@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$( document ).ready(function() {
+  testData = 'not assigned'
+
+  $(".game-button").click(function(e) {
+    e.preventDefault()
+    $(this).fadeOut("fast")
+    $.get( "/welcome/new", function(data) {
+      testData = data
+      $(".text-field").append(data["position"]);
+    })
+
+  })
+})

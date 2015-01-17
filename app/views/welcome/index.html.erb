@@ -1,4 +1,4 @@
-<div>
+<div class="container">
 
   <div class="game-map">
 
@@ -11,5 +11,5 @@
   </div>
 
   <div>search box</div>
-  <%= button_to "New Game", action: "new" %>
+  <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
 </div>
