@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container centered">
 
   <div class="game-map">
 
@@ -6,10 +6,13 @@
   </div>
 
 
-  <div class="text-field">
+  <div class="text-field centered">
 
   </div>
 
-  <div>search box</div>
+  <div class= 'input-field centered'>
+    <%= text_field_tag 'direction' %>
+  </div>
+
   <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
 </div>
