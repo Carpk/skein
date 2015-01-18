@@ -11,7 +11,7 @@
   </div>
 
   <div class= 'input-field centered'>
-    <%= text_field_tag 'direction' %>
+    <%= text_field_tag 'direction', nil, id: 'user-input' %>
   </div>
 
   <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
