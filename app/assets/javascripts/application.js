@@ -24,7 +24,7 @@ $( document ).ready(function() {
     $(this).fadeOut("fast")
     $.get( "/welcome/new", function(data) {
       testData = data
-      $(".text-field").append(data["position"]);
+      $(".text-field").append(data["position"] + "<br>");
     })
   })
 
@@ -34,13 +34,17 @@ $( document ).ready(function() {
     if(keycode == '13'){
       userData = $("#user-input").serializeArray();
       // $("#user-input")[0].reset();
-      // document.getElementById("user-input").reset();
       // $("#user-input")[0].reset();
       $(".text-field").append( userData[0].value + "<br>");
-      $.post( "/welcome", userData, function( data ) {
+      $.post( "/welcome", userData, function(data) {
+        // document.getElementById("user-input").reset();
+        setTimeout(function(){
+
+          $(".text-field").append( "You moved to: " + data.position + "<br>");
+
+        },800)
 
       })
-      console.log()
     }
   });
 
