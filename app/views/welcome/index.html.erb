@@ -10,8 +10,10 @@
 
   </div>
 
-  <div class= 'input-field centered'>
-    <%= text_field_tag 'direction', nil, id: 'user-input' %>
+  <div class= "input-field centered">
+    <%= form_tag("/welcome", method: "post", id: 'user-input') do %>
+      <%= text_field_tag 'direction' %>
+    <% end %>
   </div>
 
   <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
