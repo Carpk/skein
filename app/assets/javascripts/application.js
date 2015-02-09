@@ -24,7 +24,9 @@ $( document ).ready(function() {
     $(this).fadeOut("fast")
     $.get( "/welcome/new", function(data) {
       testData = data
-      $(".text-field").append(data["position"] + "<br>");
+      $(".text-field").append( "<span id=" + count + ">" + data["position"] + "<br></span>");
+      $( "#" + count ).fadeOut( 3400 );
+      count ++
     })
   })
 
@@ -37,10 +39,12 @@ $( document ).ready(function() {
     count ++
     $.post( "/welcome", userData, function(data) {
         setTimeout(function(){
-          $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + data.position + "<br></span>");
+          $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + data.position + " room<br></span>");
             $( "#" + count ).fadeOut( 3400 );
+            $( ".hidden" ).hide();
+            $( "#" + data.position).show();
             count ++
-        }, 950)
+        }, 900)
       });
   });
 
