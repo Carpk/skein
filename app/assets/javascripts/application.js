@@ -23,29 +23,44 @@ $( document ).ready(function() {
     e.preventDefault()
     $(this).fadeOut("fast")
     $.get( "/welcome/new", function(data) {
-      testData = data
-      $(".text-field").append( "<span id=" + count + ">" + data["position"] + "<br></span>");
-      $( "#" + count ).fadeOut( 3400 );
-      count ++
-    })
-  })
+
+      gameData.locations = data
+      scrnUtil.showData(data)
+
+    });
+  });
 
   $("#user-input").submit(function(event) {
     event.preventDefault();
-    userData = $("#user-input").serializeArray();
+    userInput = $("#user-input").serializeArray();
+    testData = userInput[2].value
     document.getElementById("user-input").reset();
-    $(".text-field").append( "<span id=" + count + ">" + userData[2].value + "<br></span>");
+
+    gameData.direction = testData
+
+    $(".text-field").append( "<span id=" + count + ">" + userInput[2].value + "<br></span>");
     $( "#" + count ).fadeOut( 3400 );
     count ++
-    $.post( "/welcome", userData, function(data) {
-        setTimeout(function(){
-          $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + data.position + " room<br></span>");
-            $( "#" + count ).fadeOut( 3400 );
-            $( ".hidden" ).hide();
-            $( "#" + data.position).show();
-            count ++
-        }, 900)
-      });
+    $.post( "/welcome", userInput, function(data) {
+      setTimeout(function(){
+
+        scrnUtil.showData(data)
+
+      }, 900)
+    });
   });
+
+
+  var scrnUtil = {
+    showData : function (data) {
+      $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + data.position + " room<br></span>");
+      $( "#" + count ).fadeOut( 3400 );
+      $( ".hidden" ).hide();
+      $( "#" + data.position).show();
+      count ++
+    }
+  }
+
+  gameData = ""
 
 });
