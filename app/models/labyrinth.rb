@@ -1,5 +1,3 @@
-require_relative '../../lib/config'
-
 class Labyrinth
 
   # def initialize(position = Map.random_room, rubies = 0, spawn = Map.spawn_away_from(position), grue_sleep_count = 1, exit = Map.random_room)
@@ -10,14 +8,13 @@ class Labyrinth
   def self.start_game
     position = Map.random_room
     spawn = Map.spawn_away_from(position)
-    {position: position, grue: spawn}
+    routes = Map.possible_routes(position)
+    {position: position, grue: spawn, routes: routes}
   end
 
   def self.take_turn(current_positions)
     position = current_positions[:player]
     grue = current_positions[:grue]
-
-
   end
 
   def play

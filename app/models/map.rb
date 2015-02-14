@@ -1,3 +1,5 @@
+require_relative '../../lib/config'
+
 class Map
 
   def self.random_room
@@ -7,6 +9,15 @@ class Map
 
   def self.name_of_room(room_symbol)
     MapConfig::Map[room_symbol][:name]
+  end
+
+  def self.possible_routes(room_symbol)
+    map = MapConfig::Map
+    valid_routes = []
+    map[room_symbol].each do |key, value|
+      valid_routes << key if value.class == Symbol
+    end
+    valid_routes
   end
 
   def self.next_room(room, direction)

@@ -17,6 +17,7 @@
 
 $( document ).ready(function() {
   testData = 'not assigned'
+  gameData = {}
   var count = 0
 
   $(".game-button").click(function(e) {
@@ -38,16 +39,18 @@ $( document ).ready(function() {
 
     gameData.direction = testData
 
+
     $(".text-field").append( "<span id=" + count + ">" + userInput[2].value + "<br></span>");
     $( "#" + count ).fadeOut( 3400 );
     count ++
     $.post( "/welcome", userInput, function(data) {
       setTimeout(function(){
-
+        gameData.locations = data
         scrnUtil.showData(data)
-
       }, 900)
     });
+
+
   });
 
 
@@ -61,6 +64,5 @@ $( document ).ready(function() {
     }
   }
 
-  gameData = ""
 
 });
