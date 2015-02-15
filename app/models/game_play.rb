@@ -1,26 +1,34 @@
 class GamePlay
 
-  def initialize(player, grue, exit)
+  def initialize(player, grue, direction)
     @player = player
-    @exit = exit
     @grue = grue
+    @direction = direction
   end
 
   def current_room
-    @player.room_name
+    @player.position
   end
 
-  def exit
-    Map.name_of_room(@exit)
-  end
-
-  def door_available?(direction)
-    @player.door_available?(direction)
-  end
-
-  def move_player(direction)
+  def move_player
+    direction = @direction[:routes]
     @player.move(direction)
   end
+
+  def exit_room
+    @direction[:exit]
+  end
+
+  def grue_location
+    @grue.position
+  end
+
+  def grue_sleep_count
+    @grue.sleep_count
+  end
+
+
+
 
   def sufficient_rubies?
     @player.sufficient_rubies?

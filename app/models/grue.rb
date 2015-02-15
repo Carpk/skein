@@ -1,8 +1,9 @@
 class Grue
+  attr_reader :position, :sleep_count
 
-  def initialize(position, sleep_count)
-    @position = position
-    @sleep_count = sleep_count
+  def initialize(params)
+    @position = params[:location]
+    @sleep_count = params[:sleep]
   end
 
   def asleep?

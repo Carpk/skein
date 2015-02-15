@@ -1,9 +1,9 @@
 class Player
   attr_reader :position, :rubies
 
-  def initialize(position,rubies)
-    @position = position
-    @rubies = rubies
+  def initialize(params)
+    @position = params[:location]
+    @rubies = params[:rubies]
   end
 
   def collect_ruby
@@ -14,15 +14,11 @@ class Player
     @rubies >= 5
   end
 
-  def door_available?(direction)
-    Map.door_available?(@position, direction)
-  end
-
   def move(direction)
-    @position = Map.next_room(@position, direction)
+    @position = Map.next_room(@position.to_sym, direction.to_sym)
   end
 
-  def room_name
-    Map.name_of_room(@position)
-  end
+  # def room_name
+  #   @position
+  # end
 end

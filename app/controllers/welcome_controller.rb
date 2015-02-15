@@ -6,11 +6,10 @@ class WelcomeController < ApplicationController
   end
 
   def create
-    room = ["aquamarine", "chartreuse", "cobalt",
-            "emerald", "lavender", "ochre", "sienna",
-            "vermillion", "violet"].sample
-    data = {position: room, grue: "still in Hell"}
+    game = Labyrinth.new(params)
+    data = game.take_turn
     # data = Labyrinth.take_turn(params[:board])
+    # data = {position: position, grue: spawn, routes: routes}
     render :json => data, :status => :ok
   end
 end

@@ -17,7 +17,7 @@
 
 $( document ).ready(function() {
   testData = 'not assigned'
-  gameData = {}
+  var gameData = {}
   var count = 0
 
   $(".game-button").click(function(e) {
@@ -25,43 +25,58 @@ $( document ).ready(function() {
     $(this).fadeOut("fast")
     $.get( "/welcome/new", function(data) {
 
-      gameData.locations = data
-      scrnUtil.showData(data)
+      testData = data
+      gameData = data
+      scrnUtil.showData(data.player.location)
 
     });
   });
+
+  // {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
   $("#user-input").submit(function(event) {
     event.preventDefault();
-    userInput = $("#user-input").serializeArray();
-    testData = userInput[2].value
+    rawInput = $("#user-input").serializeArray();
+    userInput = rawInput[2].value
     document.getElementById("user-input").reset();
 
-    gameData.direction = testData
-
-
-    $(".text-field").append( "<span id=" + count + ">" + userInput[2].value + "<br></span>");
+    $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
     $( "#" + count ).fadeOut( 3400 );
     count ++
-    $.post( "/welcome", userInput, function(data) {
-      setTimeout(function(){
-        gameData.locations = data
-        scrnUtil.showData(data)
-      }, 900)
-    });
 
+    routesArray = gameData.game.routes
 
+    if ($.inArray(userInput, routesArray) == -1) {
+
+      $(".text-field").append( "<span id=" + count + ">Please choose a valid direction. (north, east, south, west)<br></span>");
+      $( "#" + count ).fadeOut( 3400 );
+      count ++
+
+    } else {
+
+      gameData.game.routes = userInput
+      $.post( "/welcome", gameData, function(data) {
+        setTimeout(function(){
+          testData = data
+          gameData = data
+          scrnUtil.showData(data.player.location)
+        }, 900)
+      });
+
+    };
   });
 
+  // {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
   var scrnUtil = {
-    showData : function (data) {
-      $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + data.position + " room<br></span>");
+    showData : function (location) {
+      $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + location + " room<br></span>");
       $( "#" + count ).fadeOut( 3400 );
       $( ".hidden" ).hide();
-      $( "#" + data.position).show();
+      $( "#" + location).show();
       count ++
     }
+
   }
 
 
