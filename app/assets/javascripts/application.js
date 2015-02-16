@@ -19,6 +19,7 @@ $( document ).ready(function() {
   testData = 'not assigned'
   var gameData = {}
   var count = 0
+  rubyCount = 0
 
   $(".game-button").click(function(e) {
     e.preventDefault()
@@ -60,13 +61,21 @@ $( document ).ready(function() {
           testData = data
           gameData = data
           scrnUtil.showData(data.player.location)
-        }, 900)
+        }, 450)
       });
+
+      if (rubyCount != gameData.player.rubies) {
+
+        $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
+        $( "#" + count ).fadeOut( 3400 );
+        rubyCount ++
+        count ++
+      }
 
     };
   });
 
-  // {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
+  // json looks like: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
   var scrnUtil = {
     showData : function (location) {

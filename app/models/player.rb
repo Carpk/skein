@@ -3,7 +3,7 @@ class Player
 
   def initialize(params)
     @position = params[:location]
-    @rubies = params[:rubies]
+    @rubies = params[:rubies].to_i
   end
 
   def collect_ruby
@@ -18,7 +18,4 @@ class Player
     @position = Map.next_room(@position.to_sym, direction.to_sym)
   end
 
-  # def room_name
-  #   @position
-  # end
 end

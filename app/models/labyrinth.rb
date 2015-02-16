@@ -20,17 +20,13 @@ class Labyrinth
 
   def take_turn
     @game.move_player
-    player_location = @game.current_room
-    rubies = @game.num_of_rubies
-    grue_location = @game.grue_location
-    grue_sleep = @game.grue_sleep_count
-    routes = Map.possible_routes(player_location)
-    exit = @game.exit_room
+    @game.ruby_chance
 
-    {player: {location: player_location, rubies: rubies},
-     grue: {location: grue_location, sleep: grue_sleep},
-     game: {routes: routes, exit: exit}
-    }
+    player_data = @game.hash_player_data
+    grue_data = @game.hash_grue_data
+    game_data = @game.hash_game_data
+
+    { player: player_data, grue: grue_data, game: game_data }
   end
 
 
