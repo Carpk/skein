@@ -65,7 +65,7 @@ $( document ).ready(function() {
       });
 
       if (rubyCount != gameData.player.rubies) {
-
+        $("#ruby-field").html(gameData.player.rubies)
         $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
         $( "#" + count ).fadeOut( 3400 );
         rubyCount ++
