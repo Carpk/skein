@@ -1,9 +1,9 @@
 class GamePlay
 
-  def initialize(player, grue, direction)
+  def initialize(player, grue, game_data)
     @player = player
     @grue = grue
-    @direction = direction
+    @directions_hash = game_data
   end
 
   def current_room
@@ -21,7 +21,7 @@ class GamePlay
   end
 
   def move_player
-    direction = @direction[:routes]
+    direction = @directions_hash[:routes]
     @player.move(direction)
   end
 
@@ -41,12 +41,14 @@ class GamePlay
 
   def hash_game_data
     routes = Map.possible_routes(current_room)
-    exit = @direction[:exit]
-    {routes: routes, exit: exit}
+    exit = @directions_hash[:exit]
+    progress =  @directions_hash[:progress]
+    win =  @directions_hash[:win]
+    {routes: routes, exit: exit, progress: progress, win: win }
   end
 
   def win_ruby?
-    rand(0..5) == 4
+    rand(2..4) == 3
   end
 
   def ruby_chance
@@ -62,6 +64,12 @@ class GamePlay
     end
   end
 
+  def check_rubies
+    if num_of_rubies > 2
+      @directions_hash[:win] = true
+      @directions_hash[:progress] = false
+    end
+  end
 
 
 

@@ -14,7 +14,7 @@ class Labyrinth
     routes = Map.possible_routes(position)
     { player: {location: position, rubies: 0},
       grue: {location: spawn, sleep: 0},
-      game: {routes: routes, exit: exit}
+      game: {routes: routes, exit: exit, progress: true, win: false}
     }
   end
 
@@ -24,6 +24,7 @@ class Labyrinth
     @game.ruby_chance
     @game.grue_possible_move
     # check if grue moved in on player
+    @game.check_rubies
 
     player_data = @game.hash_player_data
     grue_data = @game.hash_grue_data

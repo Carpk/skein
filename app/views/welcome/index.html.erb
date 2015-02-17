@@ -33,5 +33,13 @@
     <% end %>
   </div>
 
+  <div id="win-text" class="hidden final-text">
+    You win!!
+  </div>
+
+  <div id="lose-text" class="hidden final-text">
+    The grue devoured you, try again
+  </div>
+
   <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
 </div>

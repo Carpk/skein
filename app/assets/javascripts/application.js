@@ -16,7 +16,6 @@
 //= require_tree .
 
 $( document ).ready(function() {
-  testData = 'not assigned'
   var gameData = {}
   var count = 0
   rubyCount = 0
@@ -26,57 +25,59 @@ $( document ).ready(function() {
     $(this).fadeOut("fast")
     $.get( "/welcome/new", function(data) {
 
-      testData = data
       gameData = data
       scrnUtil.showData(data.player.location)
 
     });
   });
 
-  // {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
+  // json: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
-  $("#user-input").submit(function(event) {
-    event.preventDefault();
-    rawInput = $("#user-input").serializeArray();
-    userInput = rawInput[2].value
-    document.getElementById("user-input").reset();
+    $("#user-input").submit(function(event) {
+      event.preventDefault();
+      rawInput = $("#user-input").serializeArray();
+      userInput = rawInput[2].value
+      document.getElementById("user-input").reset();
 
-    $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
-    $( "#" + count ).fadeOut( 3400 );
-    count ++
-
-    routesArray = gameData.game.routes
-
-    if ($.inArray(userInput, routesArray) == -1) {
-
-      $(".text-field").append( "<span id=" + count + ">Please choose a valid direction. (north, east, south, west)<br></span>");
+      $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
       $( "#" + count ).fadeOut( 3400 );
       count ++
 
-    } else {
+      routesArray = gameData.game.routes
 
-      gameData.game.routes = userInput
+        if ($.inArray(userInput, routesArray) == -1) {
+          $(".text-field").append( "<span id=" + count + ">Please choose a valid direction. (north, east, south, west)<br></span>");
+          $( "#" + count ).fadeOut( 3400 );
+          count ++
+        } else {
+          gameData.game.routes = userInput
 
-      $.post( "/welcome", gameData, function(data) {
-        setTimeout(function(){
-          testData = data
-          gameData = data
-          scrnUtil.showData(data.player.location)
-        }, 450)
-      });
+          $.post( "/welcome", gameData, function(data) {
+            setTimeout(function(){
+              gameData = data
+              scrnUtil.showData(data.player.location);
+            }, 450)
+          });
 
-      console.log(gameData.grue.location);
+          if (rubyCount != gameData.player.rubies) {
+            $("#ruby-field").html(gameData.player.rubies);
+            $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
+            $( "#" + count ).fadeOut( 3400 );
+            rubyCount ++
+            count ++
+          }
 
-      if (rubyCount != gameData.player.rubies) {
-        $("#ruby-field").html(gameData.player.rubies)
-        $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
-        $( "#" + count ).fadeOut( 3400 );
-        rubyCount ++
-        count ++
-      }
+          if (gameData.game.progress == false) {
+            if (gameData.game.win) {
+              $("#win-text").show();
+            } else {
+              $("#lose-text").show();
+            };
+          };
 
-    };
-  });
+        };
+
+    });
 
   // json looks like: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
