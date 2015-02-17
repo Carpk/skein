@@ -34,7 +34,7 @@ class GamePlay
   end
 
   def hash_grue_data
-    grue_location = grue_location
+    # grue_location = grue_location
     grue_sleep = grue_sleep_count
     {location: grue_location, sleep: grue_sleep}
   end
@@ -52,6 +52,13 @@ class GamePlay
   def ruby_chance
     if win_ruby?
       @player.collect_ruby
+    end
+  end
+
+  def grue_possible_move
+    @grue.sleep_turn
+    if @grue.awake?
+      @grue.move_to(current_room)
     end
   end
 

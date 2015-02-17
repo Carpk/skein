@@ -2,13 +2,16 @@ class Grue
   attr_reader :position, :sleep_count
 
   def initialize(params)
-    @position = params[:location]
-    @sleep_count = params[:sleep]
+    @position = params[:location].to_sym
+    @sleep_count = params[:sleep].to_i
   end
 
   def asleep?
-    puts @position
     @sleep_count % 6 != 0
+  end
+
+  def awake?
+    @sleep_count % 6 == 0
   end
 
   def sleep_turn

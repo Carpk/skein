@@ -21,6 +21,7 @@ class Labyrinth
   def take_turn
     @game.move_player
     @game.ruby_chance
+    @game.grue_possible_move
 
     player_data = @game.hash_player_data
     grue_data = @game.hash_grue_data

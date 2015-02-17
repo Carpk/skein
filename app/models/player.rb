@@ -2,7 +2,7 @@ class Player
   attr_reader :position, :rubies
 
   def initialize(params)
-    @position = params[:location]
+    @position = params[:location].to_sym
     @rubies = params[:rubies].to_i
   end
 
@@ -15,7 +15,7 @@ class Player
   end
 
   def move(direction)
-    @position = Map.next_room(@position.to_sym, direction.to_sym)
+    @position = Map.next_room(@position, direction.to_sym)
   end
 
 end

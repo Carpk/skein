@@ -56,6 +56,7 @@ $( document ).ready(function() {
     } else {
 
       gameData.game.routes = userInput
+
       $.post( "/welcome", gameData, function(data) {
         setTimeout(function(){
           testData = data
@@ -63,6 +64,8 @@ $( document ).ready(function() {
           scrnUtil.showData(data.player.location)
         }, 450)
       });
+
+      console.log(gameData.grue.location);
 
       if (rubyCount != gameData.player.rubies) {
         $("#ruby-field").html(gameData.player.rubies)
