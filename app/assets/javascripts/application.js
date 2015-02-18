@@ -101,4 +101,21 @@ $( document ).ready(function() {
   }
 
 
+  // var bgArray = ['d1.jpg', 'd2.jpg', 'd3.jpg'];
+  // var bg = bgArray[Math.floor(Math.random() * bgArray.length)];
+
+  // $('body').css('background-image', bg);
+
+  // If you have defined a path for the images
+  // var path = 'assets/';
+
+  // then you can put it right before the variable 'bg'
+  // $('body').css('background', path+bg);
+
+var images = ['d1.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd5.jpg'];
+$('html').css({'background-image': 'url(assets/' + images[Math.floor(Math.random() * images.length)] + ')'});
+
+
+
+
 });
