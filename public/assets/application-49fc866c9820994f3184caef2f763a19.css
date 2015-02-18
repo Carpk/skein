@@ -16,7 +16,11 @@
 
 
 body {
+  margin-top: 7%;
   background: #1F1F1F;
+  background-image: url('/assets/d2-7b86f8d5c339cdeceb2461b2a80fb0ea.jpg');
+  /*background-image: url("d5.jpg");*/
+  background-size: 100%;
 }
 
 .container {
