@@ -81,12 +81,12 @@ $( document ).ready(function() {
 
         };
       }
-
-
-
-
     });
 
+  $("#replay").click(function(event) {
+    event.preventDefault();
+    location.reload();
+  })
   // json looks like: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
   var scrnUtil = {

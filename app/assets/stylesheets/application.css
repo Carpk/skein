@@ -74,7 +74,6 @@ body {
   background: black;
   margin-top: 2em;
   color: green;
-  /*white-space: pre;*/
   font-family: monospace;
 }
 
@@ -93,6 +92,10 @@ body {
 }
 
 .final-text {
-  height: 20em;
+  position: absolute;
+  top: 12em;
+  left: 29em;
+  background: pink;
+  height: 12em;
   width: 25em;
 }
