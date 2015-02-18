@@ -16,15 +16,14 @@
 
 
 html {
-
   background: #050505;
+  background-image: url('/assets/d4-0f0a341f140081e0812eaf9f47572251.jpg');
   background-size: 100%;
   background-repeat: no-repeat;
 }
 
 body {
   margin-top: 7%;
-
 }
 
 .container {
