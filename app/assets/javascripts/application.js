@@ -101,10 +101,8 @@ $( document ).ready(function() {
   }
 
 
-// var images = ['d0.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd5.jpg', 'd6.jpg'];
-// $('html').css({'background-image': 'url(assets/' + images[Math.floor(Math.random() * images.length)] + ')'});
-
-
+  var images = ['d0.jpg', 'd1.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd6.jpg'];
+  $('html').css({'background-image': 'url(assets/' + images[Math.floor(Math.random() * images.length)] + ')'});
 
 
 });
