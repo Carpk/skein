@@ -20,7 +20,7 @@ class Labyrinth
 
   def take_turn
     @game.move_player
-    # add a Grue flee method
+    @game.grue_possible_flee
     @game.ruby_chance
     @game.grue_possible_move
     # check if grue moved in on player

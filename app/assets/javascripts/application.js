@@ -39,16 +39,19 @@ $( document ).ready(function() {
       userInput = rawInput[2].value
       document.getElementById("user-input").reset();
 
-      $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
-      $( "#" + count ).fadeOut( 3400 );
-      count ++
+      if (gameData.game.progress) {
 
-      routesArray = gameData.game.routes
+        $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
+        $( "#" + count ).fadeOut( 3400 );
+        count ++
+
+        routesArray = gameData.game.routes
 
         if ($.inArray(userInput, routesArray) == -1) {
           $(".text-field").append( "<span id=" + count + ">Please choose a valid direction. (north, east, south, west)<br></span>");
           $( "#" + count ).fadeOut( 3400 );
           count ++
+
         } else {
           gameData.game.routes = userInput
 
@@ -56,26 +59,31 @@ $( document ).ready(function() {
             setTimeout(function(){
               gameData = data
               scrnUtil.showData(data.player.location);
+
+              if (rubyCount != gameData.player.rubies) {
+                $("#ruby-field").html(gameData.player.rubies);
+                $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
+                $( "#" + count ).fadeOut( 3400 );
+                rubyCount ++
+                count ++
+              }
+
+              if (gameData.game.progress == false) {
+                if (gameData.game.win) {
+                  $("#win-text").show();
+                } else {
+                  $("#lose-text").show();
+                };
+              };
+
             }, 450)
           });
 
-          if (rubyCount != gameData.player.rubies) {
-            $("#ruby-field").html(gameData.player.rubies);
-            $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
-            $( "#" + count ).fadeOut( 3400 );
-            rubyCount ++
-            count ++
-          }
-
-          if (gameData.game.progress == false) {
-            if (gameData.game.win) {
-              $("#win-text").show();
-            } else {
-              $("#lose-text").show();
-            };
-          };
-
         };
+      }
+
+
+
 
     });
 

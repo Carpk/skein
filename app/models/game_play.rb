@@ -71,6 +71,23 @@ class GamePlay
     end
   end
 
+  def grue_in_room?
+    @grue.found_player?(@player.position)
+  end
+
+  def grue_flee_room
+    @grue.flee_room
+  end
+
+  def grue_possible_flee
+    if grue_in_room?
+      grue_flee_room
+    end
+  end
+
+
+
+
 
 
   def sufficient_rubies?
@@ -87,14 +104,6 @@ class GamePlay
 
   def grue_find_player
     @grue.move_to(@player.position)
-  end
-
-  def grue_in_room?
-    @grue.found_player?(@player.position)
-  end
-
-  def grue_flee_room
-    @grue.flee_room
   end
 
   def grue_sleeps
