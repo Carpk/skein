@@ -23,14 +23,13 @@ class Labyrinth
     @game.grue_possible_flee
     @game.ruby_chance
     @game.grue_possible_move
-    # check if grue moved in on player
     @game.check_rubies
+    @game.grue_possible_win # check if grue moved in on player
 
     player_data = @game.hash_player_data
     grue_data = @game.hash_grue_data
     game_data = @game.hash_game_data
 
-    #  game: {routes: x, exit: x} to {routes: x, exit: x, active: x, win: x}
     { player: player_data, grue: grue_data, game: game_data }
   end
 

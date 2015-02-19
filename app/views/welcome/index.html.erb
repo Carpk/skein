@@ -35,12 +35,12 @@
 
   <div id="win-text" class="hidden final-text">
     <center>You win!</center>
-    <a href="" id="replay">try again</a>
+    <center><a href="" id="replay">play again</a></center>
   </div>
 
   <div id="lose-text" class="hidden final-text">
     <center>The grue devoured you, try again</center>
-    <a href="">try again</a>
+    <center><a href="" id="replay">try again</a></center>
   </div>
 
   <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>

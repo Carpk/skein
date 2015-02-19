@@ -16,7 +16,6 @@
 
 html {
   background: #050505;
-  background-image: url('<%= asset_path("d4.jpg") %>');
   background-size: 100%;
   background-repeat: no-repeat;
 }
@@ -80,7 +79,6 @@ body {
   height: 25em;
   background: black;
   margin-top: 2em;
-  /*color: green;*/
   font-family: monospace;
 }
 
@@ -101,10 +99,18 @@ body {
 .final-text {
   position: absolute;
   top: 12em;
-  left: 29em;
-  background: pink;
+  left: 30em;
   height: 12em;
   width: 25em;
+}
+
+#win-text {
+background: #e7e690;
+}
+
+#lose-text {
+  color: white;
+  background: #1b1b1b;
 }
 
 .ver {
@@ -128,7 +134,7 @@ body {
 }
 
 .lav {
-  color: #E6E6FA;
+  color: #B57EDC;
 }
 
 .cob {

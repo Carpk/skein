@@ -17,7 +17,7 @@
 
 $( document ).ready(function() {
   var colors = [ "#E34234", "#CC7722", "#bdf030", "#50C878", "#7FFFD4", "#E6E6FA", "#0047AB", "#7F00FF", "#E97451"]
-  var images = [ 'd1.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd5.jpg', 'd6.jpg', 'd7.jpg', 'd8.jpg', 'd9.jpg', 'd10.jpg', 'd11.jpg', 'd12.jpg', 'd13.jpg', 'd14.jpg', 'd15.jpg', 'd16.jpg', 'd17.jpg', 'd18.png', 'd19.jpg', 'd20.jpg'];
+  var images = [ 'd1.jpg', 'd2.jpg', 'd3.jpg', 'd4.jpg', 'd5.jpg', 'd6.jpg', 'd7.jpg', 'd8.jpg', 'd9.jpg', 'd10.jpg', 'd11.jpg', 'd12.jpg', 'd13.jpg', 'd14.jpg', 'd15.jpg', 'd16.jpg', 'd17.jpg', 'd18.jpg', 'd19.jpg', 'd20.jpg'];
   var gameData = {}
   var count = 0
   rubyCount = 0
@@ -31,6 +31,10 @@ $( document ).ready(function() {
       scrnUtil.showData(data.player.location)
       room = gameData.player.location.substring(0,3)
       $('#game-map').addClass(room);
+
+      $('#game-map').removeClass();
+      $('#game-map').addClass(room);
+      $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
 
     });
   });
@@ -83,8 +87,7 @@ $( document ).ready(function() {
               room = gameData.player.location.substring(0,3)
               $('#game-map').removeClass();
               $('#game-map').addClass(room);
-              // $('.game-map').css({'color':  colors[Math.floor(Math.random() * colors.length)] });
-              $('html').css({'background-image': 'url(assets/' + images[Math.floor(Math.random() * images.length)] + ')'});
+              $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
 
             }, 450)
           });

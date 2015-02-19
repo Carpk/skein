@@ -34,9 +34,7 @@ class GamePlay
   end
 
   def hash_grue_data
-    # grue_location = grue_location
-    grue_sleep = grue_sleep_count
-    {location: grue_location, sleep: grue_sleep}
+    {location: grue_location, sleep: grue_sleep_count}
   end
 
   def hash_game_data
@@ -51,9 +49,13 @@ class GamePlay
     rand(2..4) == 3
   end
 
+  def issue_ruby
+    @player.collect_ruby
+  end
+
   def ruby_chance
     if win_ruby?
-      @player.collect_ruby
+      issue_ruby
     end
   end
 
@@ -64,10 +66,14 @@ class GamePlay
     end
   end
 
+  def end_game
+    @directions_hash[:progress] = false
+  end
+
   def check_rubies
     if num_of_rubies > 2
       @directions_hash[:win] = true
-      @directions_hash[:progress] = false
+      end_game
     end
   end
 
@@ -85,6 +91,12 @@ class GamePlay
     end
   end
 
+  def grue_possible_win
+    if grue_in_room?
+      @directions_hash[:win] = false
+      end_game
+    end
+  end
 
 
 
@@ -92,10 +104,6 @@ class GamePlay
 
   def sufficient_rubies?
     @player.sufficient_rubies?
-  end
-
-  def issue_ruby
-    @player.collect_ruby
   end
 
   def grue_asleep?
