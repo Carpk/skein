@@ -17,7 +17,7 @@
 
 $( document ).ready(function() {
   var gameData = {}
-  var count = 0
+  var idNum = 0
   rubyCount = 0
 
   $(".game-button").click(function(e) {
@@ -30,12 +30,10 @@ $( document ).ready(function() {
       room = gameData.player.location.substring(0,3)
       $('#game-map').addClass(room);
 
-      setRoomColor(room)
+      setRoomColor(room);
 
     });
   });
-
-  // json: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
 
     $("#user-input").submit(function(event) {
       event.preventDefault();
@@ -44,48 +42,7 @@ $( document ).ready(function() {
       document.getElementById("user-input").reset();
 
       if (gameData.game.progress) {
-
-        $(".text-field").append( "<span id=" + count + ">" + userInput + "<br></span>");
-        $( "#" + count ).fadeOut( 3400 );
-        count ++
-
-        routesArray = gameData.game.routes
-
-        if ($.inArray(userInput, routesArray) == -1) {
-          $(".text-field").append( "<span id=" + count + ">Please choose a valid direction. (north, east, south, west)<br></span>");
-          $( "#" + count ).fadeOut( 3400 );
-          count ++
-
-        } else {
-          gameData.game.routes = userInput
-
-          $.post( "/welcome", gameData, function(data) {
-            setTimeout(function(){
-              gameData = data
-              scrnUtil.showData(data.player.location);
-
-              if (rubyCount != gameData.player.rubies) {
-                $("#ruby-field").html(gameData.player.rubies);
-                $(".text-field").append( "<span id=" + count + ">You found a Ruby!<br></span>");
-                $( "#" + count ).fadeOut( 3400 );
-                rubyCount ++
-                count ++
-              }
-
-              if (gameData.game.progress == false) {
-                if (gameData.game.win) {
-                  $("#win-text").show();
-                } else {
-                  $("#lose-text").show();
-                };
-              };
-
-              room = gameData.player.location.substring(0,3)
-              setRoomColor(room)
-
-            }, 450)
-          });
-        };
+        progressGame();
       }
     });
 
@@ -94,21 +51,69 @@ $( document ).ready(function() {
     location.reload();
   })
 
+  function progressGame() {
+    $(".text-field").append( "<span id=" + idNum + ">" + userInput + "<br></span>");
+    fadeOutId();
+
+    routesArray = gameData.game.routes
+
+    if ($.inArray(userInput, routesArray) == -1) {
+      invalidResponse();
+
+    } else {
+      gameData.game.routes = userInput
+
+      $.post( "/welcome", gameData, function(data) {
+        setTimeout(function(){
+          gameData = data
+          scrnUtil.showData(data.player.location);
+
+          if (rubyCount != gameData.player.rubies) {
+            $("#ruby-field").html(gameData.player.rubies);
+            $(".text-field").append( "<span id=" + idNum + ">You found a Ruby!<br></span>");
+            fadeOutId();
+            rubyCount ++
+          }
+
+          if (gameData.game.progress == false) {
+            if (gameData.game.win) {
+              $("#win-text").show();
+            } else {
+              $("#lose-text").show();
+            };
+          };
+
+          room = gameData.player.location.substring(0,3)
+          setRoomColor(room);
+
+        }, 450)
+      });
+    };
+  }
+
+  function invalidResponse() {
+    $(".text-field").append( "<span id=" + idNum + ">Please choose a valid direction. (north, east, south, west)<br></span>");
+    fadeOutId();
+  }
+
   function setRoomColor(room) {
     $('#game-map').removeClass();
     $('#game-map').addClass(room);
     $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
   }
 
+  function fadeOutId() {
+    $( "#" + idNum ).fadeOut( 3400 );
+    idNum ++
+  }
+
   var scrnUtil = {
     showData : function (location) {
-      $(".text-field").append( "<span id=" + count + ">" + "You moved to: " + location + " room<br></span>");
-      $( "#" + count ).fadeOut( 3400 );
+      $(".text-field").append( "<span id=" + idNum + ">" + "You moved to: " + location + " room<br></span>");
+      fadeOutId();
       $( ".hidden" ).hide();
       $( "#" + location).show();
-      count ++
     }
-
   }
 
 
