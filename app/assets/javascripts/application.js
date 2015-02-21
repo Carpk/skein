@@ -30,9 +30,7 @@ $( document ).ready(function() {
       room = gameData.player.location.substring(0,3)
       $('#game-map').addClass(room);
 
-      $('#game-map').removeClass();
-      $('#game-map').addClass(room);
-      $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
+      setRoomColor(room)
 
     });
   });
@@ -83,13 +81,10 @@ $( document ).ready(function() {
               };
 
               room = gameData.player.location.substring(0,3)
-              $('#game-map').removeClass();
-              $('#game-map').addClass(room);
-              $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
+              setRoomColor(room)
 
             }, 450)
           });
-
         };
       }
     });
@@ -98,7 +93,12 @@ $( document ).ready(function() {
     event.preventDefault();
     location.reload();
   })
-  // json looks like: {player: {location: x, rubies: x}, grue: {location: x, sleep: x}, game: {routes: x, exit: x}}
+
+  function setRoomColor(room) {
+    $('#game-map').removeClass();
+    $('#game-map').addClass(room);
+    $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
+  }
 
   var scrnUtil = {
     showData : function (location) {
