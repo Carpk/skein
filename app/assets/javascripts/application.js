@@ -18,7 +18,7 @@
 $( document ).ready(function() {
   var gameData = {}
   var idNum = 0
-  rubyCount = 0
+  var rubyCount = 0
 
   $(".game-button").click(function(e) {
     e.preventDefault()
@@ -35,16 +35,16 @@ $( document ).ready(function() {
     });
   });
 
-    $("#user-input").submit(function(event) {
-      event.preventDefault();
-      rawInput = $("#user-input").serializeArray();
-      userInput = rawInput[2].value
-      document.getElementById("user-input").reset();
+  $("#user-input").submit(function(event) {
+    event.preventDefault();
+    rawInput = $("#user-input").serializeArray();
+    userInput = rawInput[2].value
+    document.getElementById("user-input").reset();
 
-      if (gameData.game.progress) {
-        progressGame();
-      }
-    });
+    if (gameData.game.progress) {
+      progressGame();
+    }
+  });
 
   $("#replay").click(function(event) {
     event.preventDefault();
@@ -69,18 +69,11 @@ $( document ).ready(function() {
           scrnUtil.showData(data.player.location);
 
           if (rubyCount != gameData.player.rubies) {
-            $("#ruby-field").html(gameData.player.rubies);
-            $(".text-field").append( "<span id=" + idNum + ">You found a Ruby!<br></span>");
-            fadeOutId();
-            rubyCount ++
+            addRuby();
           }
 
           if (gameData.game.progress == false) {
-            if (gameData.game.win) {
-              $("#win-text").show();
-            } else {
-              $("#lose-text").show();
-            };
+            gameOverText();
           };
 
           room = gameData.player.location.substring(0,3)
@@ -91,21 +84,36 @@ $( document ).ready(function() {
     };
   }
 
+  function gameOverText() {
+    if (gameData.game.win) {
+      $("#win-text").show();
+    } else {
+      $("#lose-text").show();
+    };
+  }
+
+  function addRuby() {
+    $("#ruby-field").html(gameData.player.rubies);
+    $(".text-field").append( "<span id=" + idNum + ">You found a Ruby!<br></span>");
+    fadeOutId();
+    rubyCount ++
+  };
+
   function invalidResponse() {
     $(".text-field").append( "<span id=" + idNum + ">Please choose a valid direction. (north, east, south, west)<br></span>");
     fadeOutId();
-  }
+  };
 
   function setRoomColor(room) {
     $('#game-map').removeClass();
     $('#game-map').addClass(room);
     $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
-  }
+  };
 
   function fadeOutId() {
     $( "#" + idNum ).fadeOut( 3400 );
     idNum ++
-  }
+  };
 
   var scrnUtil = {
     showData : function (location) {
@@ -113,8 +121,8 @@ $( document ).ready(function() {
       fadeOutId();
       $( ".hidden" ).hide();
       $( "#" + location).show();
-    }
-  }
+    };
+  };
 
 
 });
