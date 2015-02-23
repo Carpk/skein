@@ -63,25 +63,29 @@ $( document ).ready(function() {
     } else {
       gameData.game.routes = userInput
 
-      $.post( "/welcome", gameData, function(data) {
-        setTimeout(function(){
-          gameData = data
-          scrnUtil.showData(data.player.location);
-
-          if (rubyCount != gameData.player.rubies) {
-            addRuby();
-          }
-
-          if (gameData.game.progress == false) {
-            gameOverText();
-          };
-
-          room = gameData.player.location.substring(0,3)
-          setRoomColor(room);
-
-        }, 450)
-      });
+      sendData();
     };
+  };
+
+  function sendData() {
+    $.post( "/welcome", gameData, function(data) {
+      setTimeout(function(){
+        gameData = data
+        scrnUtil.showData(data.player.location);
+
+        if (rubyCount != gameData.player.rubies) {
+          addRuby();
+        }
+
+        if (gameData.game.progress == false) {
+          gameOverText();
+        };
+
+        room = gameData.player.location.substring(0,3)
+        setRoomColor(room);
+
+      }, 450)
+    });
   }
 
   function gameOverText() {
