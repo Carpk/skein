@@ -67,22 +67,26 @@ $( document ).ready(function() {
     };
   };
 
+  function setGameState() {
+    if (rubyCount != gameData.player.rubies) {
+      addRuby();
+    }
+
+    if (gameData.game.progress == false) {
+      gameOverText();
+    };
+
+    room = gameData.player.location.substring(0,3)
+    setRoomColor(room);
+  }
+
   function sendData() {
     $.post( "/welcome", gameData, function(data) {
-      setTimeout(function(){
+      setTimeout(function() {
         gameData = data
         scrnUtil.showData(data.player.location);
 
-        if (rubyCount != gameData.player.rubies) {
-          addRuby();
-        }
-
-        if (gameData.game.progress == false) {
-          gameOverText();
-        };
-
-        room = gameData.player.location.substring(0,3)
-        setRoomColor(room);
+        setGameState();
 
       }, 450)
     });
@@ -93,8 +97,8 @@ $( document ).ready(function() {
       $("#win-text").show();
     } else {
       $("#lose-text").show();
-    };
-  }
+    }
+  };
 
   function addRuby() {
     $("#ruby-field").html(gameData.player.rubies);
@@ -125,8 +129,7 @@ $( document ).ready(function() {
       fadeOutId();
       $( ".hidden" ).hide();
       $( "#" + location).show();
-    };
+    }
   };
-
 
 });
