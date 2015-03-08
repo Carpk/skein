@@ -37,6 +37,15 @@ body {
   margin-left: auto;
 }
 
+.welcome-text {
+  position: absolute;
+  top: 12em;
+  left: 25em;
+  background-color: beige;
+  padding: 12px;
+  width: 34em;
+}
+
 #north {
   width: 100%;
   height: 8em;

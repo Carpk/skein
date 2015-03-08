@@ -20,37 +20,6 @@ $( document ).ready(function() {
   var idNum = 0
   var rubyCount = 0
 
-  $(".game-button").click(function(e) {
-    e.preventDefault()
-    $(this).fadeOut("fast")
-    $.get( "/welcome/new", function(data) {
-
-      gameData = data
-      scrnUtil.showData(data.player.location)
-      room = gameData.player.location.substring(0,3)
-      $('#game-map').addClass(room);
-
-      setRoomColor(room);
-
-    });
-  });
-
-  $("#user-input").submit(function(event) {
-    event.preventDefault();
-    rawInput = $("#user-input").serializeArray();
-    userInput = rawInput[2].value
-    document.getElementById("user-input").reset();
-
-    if (gameData.game.progress) {
-      progressGame();
-    }
-  });
-
-  $("#replay").click(function(event) {
-    event.preventDefault();
-    location.reload();
-  })
-
   function progressGame() {
     $(".text-field").append( "<span id=" + idNum + ">" + userInput + "<br></span>");
     fadeOutId();
@@ -84,7 +53,7 @@ $( document ).ready(function() {
     $.post( "/welcome", gameData, function(data) {
       setTimeout(function() {
         gameData = data
-        scrnUtil.showData(data.player.location);
+        showData(data.player.location);
 
         setGameState();
 
@@ -123,13 +92,42 @@ $( document ).ready(function() {
     idNum ++
   };
 
-  var scrnUtil = {
-    showData : function (location) {
-      $(".text-field").append( "<span id=" + idNum + ">" + "You moved to: " + location + " room<br></span>");
-      fadeOutId();
-      $( ".hidden" ).hide();
-      $( "#" + location).show();
-    }
+  function showData(location) {
+    $(".text-field").append( "<span id=" + idNum + ">" + "You moved to: " + location + " room<br></span>");
+    fadeOutId();
+    $( ".hidden" ).hide();
+    $( "#" + location).show();
   };
+
+  $(".game-button").click(function(e) {
+    e.preventDefault()
+    $(".welcome-text").fadeOut("fast")
+    $.get( "/welcome/new", function(data) {
+
+      gameData = data
+      showData(data.player.location)
+      room = gameData.player.location.substring(0,3)
+      $('#game-map').addClass(room);
+
+      setRoomColor(room);
+
+    });
+  });
+
+  $("#user-input").submit(function(event) {
+    event.preventDefault();
+    rawInput = $("#user-input").serializeArray();
+    userInput = rawInput[2].value
+    document.getElementById("user-input").reset();
+
+    if (gameData.game.progress) {
+      progressGame();
+    }
+  });
+
+  $("#replay").click(function(event) {
+    event.preventDefault();
+    location.reload();
+  })
 
 });

@@ -33,6 +33,15 @@
     <% end %>
   </div>
 
+  <div class="welcome-text centered">
+    <center>Welcome to Skein</center>
+    Skein is a text based adventure game, where you wander around a labyrinth in search of precious Rubies. But dont let the Grue get a hold of you! You will perish is he does.
+    <center>
+      <%= link_to "Play Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
+    </center>
+
+  </div>
+
   <div id="win-text" class="hidden final-text">
     <center>You win!</center>
     <center><a href="" id="replay">play again</a></center>
@@ -43,5 +52,4 @@
     <center><a href="" id="replay">try again</a></center>
   </div>
 
-  <%= link_to "New Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
 </div>
