@@ -28,10 +28,8 @@ $( document ).ready(function() {
 
     if ($.inArray(userInput, routesArray) == -1) {
       invalidResponse();
-
     } else {
       gameData.game.routes = userInput
-
       sendData();
     };
   };
@@ -56,7 +54,6 @@ $( document ).ready(function() {
         showData(data.player.location);
 
         setGameState();
-
       }, 450)
     });
   }
@@ -70,7 +67,7 @@ $( document ).ready(function() {
   };
 
   function addRuby() {
-    $("#ruby-field").html(gameData.player.rubies);
+    $("#ruby-field").html("Rubies = " + gameData.player.rubies);
     $(".text-field").append( "<span id=" + idNum + ">You found a Ruby!<br></span>");
     fadeOutId();
     rubyCount ++
@@ -110,7 +107,6 @@ $( document ).ready(function() {
       $('#game-map').addClass(room);
 
       setRoomColor(room);
-
     });
   });
 

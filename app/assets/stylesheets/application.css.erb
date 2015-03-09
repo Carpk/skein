@@ -19,8 +19,9 @@ html {
   background-size: 100%;
   background-repeat: no-repeat;
   font-family: 'Andale Mono';
-  src: url('AndaleMono-webfont.eot?') format('eot'), url('AndaleMono-webfont.woff') format('woff'), url('AndaleMono-webfont.ttf') format('truetype');
-
+  src: url('AndaleMono-webfont.eot?') format('eot'),
+       url('AndaleMono-webfont.woff') format('woff'),
+       url('AndaleMono-webfont.ttf') format('truetype');
 }
 
 body {
@@ -84,7 +85,7 @@ body {
   bottom: 0;
   right: 0;
   height: 2em;
-  width: 2em;
+  /*width: 2em;*/
 }
 
 #game-map {
@@ -110,9 +111,10 @@ body {
 .final-text {
   position: absolute;
   top: 12em;
-  left: 30em;
-  height: 12em;
-  width: 25em;
+  left: 25em;
+  width: 36em;
+  white-space: normal;
+  padding: 12px;
 }
 
 #win-text {
