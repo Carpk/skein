@@ -30,6 +30,7 @@ body {
 }
 
 .container {
+  position: relative;
   width: 50em;
 }
 
@@ -40,8 +41,8 @@ body {
 
 .welcome-text {
   position: absolute;
-  top: 12em;
-  left: 25em;
+  top: 8.5em;
+  left: 7.25em;
   background-color: beige;
   padding: 12px;
   width: 34em;
@@ -111,8 +112,8 @@ body {
 
 .final-text {
   position: absolute;
-  top: 12em;
-  left: 25em;
+  top: 8.5em;
+  left: 6.5em;
   width: 36em;
   white-space: normal;
   padding: 12px;
