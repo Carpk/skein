@@ -98,10 +98,6 @@ class GamePlay
     end
   end
 
-
-
-
-
   def sufficient_rubies?
     @player.sufficient_rubies?
   end
@@ -119,7 +115,7 @@ class GamePlay
   end
 
   def win?
-    @player.position == @exit && @player.sufficient_rubies?
+    @player.position ==  @directions_hash[:exit] && @player.sufficient_rubies?
   end
 
   def gameover?

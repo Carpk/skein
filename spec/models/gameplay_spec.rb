@@ -2,62 +2,57 @@ require 'rails_helper'
 
 describe "GamePlay" do
 
-  let(:game) {GamePlay.new(Player.new(:violet, 0), Grue.new(:vermillion, 1), :emerald)}
+  let(:grue)   { Grue.new({location: :vermillion, sleep: 1}) }
+  let(:player) { Player.new({location: :violet, rubies: 0}) }
+  let(:game)   { GamePlay.new(player, grue, {routes: :east, exit: :emerald, progress: true, win: false}) }
 
   it "should return name of room you are in" do
-    game.current_room.should eq("Violet Room")
-  end
-
-  it "should return name of room you are in" do
-    game = GamePlay.new(Player.new(:cobalt, 0), Grue.new(:vermillion, 1), :emerald)
-    game.current_room.should eq("Cobalt Room")
+    game.current_room.should eq(:violet)
   end
 
   it "should return name of room you are in" do
-    game = GamePlay.new(Player.new(:chartreuse, 0), Grue.new(:vermillion, 1), :emerald)
-    game.current_room.should eq("Chartreuse Room")
+    player = Player.new({location: :cobalt, rubies: 0})
+    direct = {routes: :east, exit: :emerald, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
+    game.current_room.should eq(:cobalt)
+  end
+
+  it "should return name of room you are in" do
+    player = Player.new({location: :chartreuse, rubies: 0})
+    game = GamePlay.new(player, grue, :emerald)
+    game.current_room.should eq(:chartreuse)
   end
 
   it "should return name of the exit" do
-    game.exit.should eq("Emerald Room")
+    game.hash_game_data[:exit].should eq(:emerald)
   end
 
   it "should return name of the exit" do
-    game = GamePlay.new(Player.new(:emerald, 0), Grue.new(:vermillion, 1), :cobalt)
-    game.exit.should eq("Cobalt Room")
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
+    game.hash_game_data[:exit].should eq(:cobalt)
   end
 
   it "should return name of the exit" do
-    game = GamePlay.new(Player.new(:cobalt, 0), Grue.new(:vermillion, 1), :chartreuse)
-    game.exit.should eq("Chartreuse Room")
-  end
-
-  it "should return name of room to exit" do
-    game.door_available?(:north).should eq(false)
-  end
-
-  it "should return name of room to exit" do
-    game.door_available?(:east).should eq(true)
-  end
-
-  it "should return name of room to exit" do
-    game.door_available?(:south).should eq(true)
-  end
-
-  it "should return name of room to exit" do
-    game.door_available?(:west).should eq(true)
+    direct = {routes: :east, exit: :chartreuse, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
+    game.hash_game_data[:exit].should eq(:chartreuse)
   end
 
   it "should move player to new room" do
-    game.move_player(:east).should eq(:burnt_sienna)
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game.move_player.should eq(:burnt_sienna)
   end
 
   it "should move player to new room" do
-    game.move_player(:south).should eq(:burnt_sienna)
+    direct = {routes: :south, exit: :cobalt, progress: true, win: false}
+    game.move_player.should eq(:burnt_sienna)
   end
 
   it "should move player to new room" do
-    game.move_player(:west).should eq(:chartreuse)
+    direct = {routes: :west, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
+    game.move_player.should eq(:chartreuse)
   end
 
   it "should know if player has enough rubies" do
@@ -65,7 +60,10 @@ describe "GamePlay" do
   end
 
   it "should know if player has enough rubies" do
-    game = GamePlay.new(Player.new(:ochre, 0), Grue.new(:vermillion, 1), :cobalt)
+    player = Player.new({location: :ochre, rubies: 0})
+    grue = Grue.new({location: :vermillion, sleep: 1})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.sufficient_rubies?.should eq(false)
   end
 
@@ -82,7 +80,10 @@ describe "GamePlay" do
   end
 
   it "should know the number off rubies" do
-    game = GamePlay.new(Player.new(:ochre, 3), Grue.new(:vermillion, 1), :cobalt)
+    player = Player.new({location: :ochre, rubies: 3})
+    grue = Grue.new({location: :vermillion, sleep: 1})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.num_of_rubies.should eq(3)
   end
 
@@ -91,7 +92,10 @@ describe "GamePlay" do
   end
 
   it "should know the number off rubies" do
-    game = GamePlay.new(Player.new(:ochre, 6), Grue.new(:vermillion, 1), :cobalt)
+    player = Player.new({location: :ochre, rubies: 6})
+    grue = Grue.new({location: :vermillion, sleep: 1})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.num_of_rubies.should eq(6)
   end
 
@@ -100,17 +104,26 @@ describe "GamePlay" do
   end
 
   it "should know grue is asleep" do
-    game = GamePlay.new(Player.new(:ochre, 0), Grue.new(:vermillion, 5), :cobalt)
+    player = Player.new({location: :ochre, rubies: 0})
+    grue = Grue.new({location: :vermillion, sleep: 5})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_asleep?.should eq(true)
   end
 
   it "should know grue is asleep" do
-    game = GamePlay.new(Player.new(:ochre, 0), Grue.new(:vermillion, 7), :cobalt)
+    player = Player.new({location: :ochre, rubies: 0})
+    grue = Grue.new({location: :vermillion, sleep: 7})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_asleep?.should eq(true)
   end
 
   it "should know grue is not asleep" do
-    game = GamePlay.new(Player.new(:ochre, 0), Grue.new(:vermillion, 6), :cobalt)
+    player = Player.new({location: :ochre, rubies: 0})
+    grue = Grue.new({location: :vermillion, sleep: 6})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_asleep?.should eq(false)
   end
 
@@ -119,7 +132,10 @@ describe "GamePlay" do
   end
 
   it "should move closer to player" do
-    game = GamePlay.new(Player.new(:ochre, 0), Grue.new(:burnt_sienna, 6), :cobalt)
+    player = Player.new({location: :ochre, rubies: 0})
+    grue = Grue.new({location: :burnt_sienna, sleep: 6})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_find_player.should eq(:lavender)
   end
 
@@ -128,27 +144,42 @@ describe "GamePlay" do
   end
 
   it "should know grue is in same room as player" do
-    game = GamePlay.new(Player.new(:burnt_sienna, 0), Grue.new(:burnt_sienna, 6), :cobalt)
+    player = Player.new({location: :burnt_sienna, rubies: 0})
+    grue = Grue.new({location: :burnt_sienna, sleep: 6})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_in_room?.should eq(true)
   end
 
   it "should add to grue's sleep counter" do
-    game = GamePlay.new(Player.new(:burnt_sienna, 0), Grue.new(:burnt_sienna, 8), :cobalt)
+    player = Player.new({location: :burnt_sienna, rubies: 0})
+    grue = Grue.new({location: :burnt_sienna, sleep: 8})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.grue_sleeps.should eq(9)
   end
 
   it "should know when player has won" do
-    game = GamePlay.new(Player.new(:cobalt, 4), Grue.new(:vermillion, 6), :cobalt)
+    player = Player.new({location: :cobalt, rubies: 4})
+    grue = Grue.new({location: :vermillion, sleep: 6})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.win?.should eq(false)
   end
 
   it "should know when player has won" do
-    game = GamePlay.new(Player.new(:burnt_sienna, 5), Grue.new(:violet, 6), :cobalt)
+    player = Player.new({location: :burnt_sienna, rubies: 5})
+    grue = Grue.new({location: :violet, sleep: 6})
+    direct = {routes: :east, exit: :cobalt, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.win?.should eq(false)
   end
 
   it "should know when player has won" do
-    game = GamePlay.new(Player.new(:burnt_sienna, 5), Grue.new(:vermillion, 3), :burnt_sienna)
+    player = Player.new({location: :burnt_sienna, rubies: 5})
+    grue = Grue.new({location: :vermillion, sleep: 3})
+    direct = {routes: :east, exit: :burnt_sienna, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.win?.should eq(true)
   end
 
@@ -157,22 +188,34 @@ describe "GamePlay" do
   end
 
   it "should not be over with short amount of rubies in the exit room" do
-    game = GamePlay.new(Player.new(:lavender, 4), Grue.new(:burnt_sienna, 1), :lavender)
+    player = Player.new({location: :lavender, rubies: 4})
+    grue = Grue.new({location: :burnt_sienna, sleep: 1})
+    direct = {routes: :east, exit: :lavender, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.gameover?.should eq(false)
   end
 
   it "should not be over with enough rubies but not in the exit room" do
-    game = GamePlay.new(Player.new(:cobalt, 7), Grue.new(:burnt_sienna, 1), :vermillion)
+    player = Player.new({location: :cobalt, rubies: 7})
+    grue = Grue.new({location: :burnt_sienna, sleep: 1})
+    direct = {routes: :east, exit: :vermillion, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.gameover?.should eq(false)
   end
 
   it "should be over when player and grue are in same room" do
-    game = GamePlay.new(Player.new(:violet, 0), Grue.new(:violet, 1), :aquamarine)
+    player = Player.new({location: :violet, rubies: 0})
+    grue = Grue.new({location: :violet, sleep: 1})
+    direct = {routes: :east, exit: :aquamarine, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.gameover?.should eq(true)
   end
 
   it "should be over when player has rubies and in exit" do
-    game = GamePlay.new(Player.new(:violet, 5), Grue.new(:burnt_sienna, 1), :violet)
+    player = Player.new({location: :violet, rubies: 5})
+    grue = Grue.new({location: :burnt_sienna, sleep: 1})
+    direct = {routes: :east, exit: :violet, progress: true, win: false}
+    game = GamePlay.new(player, grue, direct)
     game.gameover?.should eq(true)
   end
 end

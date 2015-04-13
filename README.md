@@ -22,6 +22,7 @@ Navigate to [http://0.0.0.0:3000/](http://0.0.0.0:3000/)
 
 ![screenshot of room after move](https://raw.githubusercontent.com/Carpk/skein/master/app/assets/images/Screenshot_2.png)
 
+![screenshot of rspec passing tests](https://raw.githubusercontent.com/Carpk/skein/master/app/assets/images/Screenshot_rspec.png)
 ## License
 
 >The MIT License (MIT)
