@@ -1,5 +1,4 @@
-require_relative "../config"
-require_relative "../lib/labyrinth/console"
+require 'rails_helper'
 
 describe "Compass" do
 
