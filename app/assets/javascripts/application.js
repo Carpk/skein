@@ -51,7 +51,8 @@ $( document ).ready(function() {
     $.post( "/welcome", gameData, function(data) {
       setTimeout(function() {
         gameData = data
-        showData(data.player.location);
+        promptText(data.player.location);
+        showMap(data.player.location);
 
         setGameState();
       }, 450)
@@ -89,11 +90,19 @@ $( document ).ready(function() {
     idNum ++
   };
 
-  function showData(location) {
+  function promptText(location) {
     $(".text-field").append( "<span id=" + idNum + ">" + "You moved to: " + location + " room<br></span>");
     fadeOutId();
+  };
+
+  function showMap(location) {
     $( ".hidden" ).hide();
     $( "#" + location).show();
+  }
+
+  function movementDirections() {
+    $(".text-field").append( "<span id='directions' >To move, please type <em>north</em>, <em>east</em>, <em>south</em>, or <em>west</em><br></span>");
+    $( "#directions" ).fadeOut( 16200 );
   };
 
   $(".game-button").click(function(e) {
@@ -102,7 +111,8 @@ $( document ).ready(function() {
     $.get( "/welcome/new", function(data) {
 
       gameData = data
-      showData(data.player.location)
+      movementDirections();
+      showMap(data.player.location);
       room = gameData.player.location.substring(0,3)
       $('#game-map').addClass(room);
 
