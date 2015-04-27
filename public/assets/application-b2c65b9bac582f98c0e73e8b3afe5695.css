@@ -1,0 +1,163 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+html {
+  background: #050505;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  font-family: "Courier New", Courier, monospace;
+}
+
+body {
+  margin-top: 7%;
+}
+
+.container {
+  position: relative;
+  width: 50em;
+}
+
+.centered {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.welcome-text {
+  position: absolute;
+  top: 8.5em;
+  left: 7.25em;
+  background-color: beige;
+  padding: 12px;
+  width: 34em;
+}
+
+#north {
+  width: 100%;
+  height: 8em;
+}
+
+#west {
+  float: left;
+  height: 8em;
+  width: 19em;
+}
+
+#south {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 8em;
+}
+
+#east {
+  float: left;
+  height: 8em;
+  width: 17em;
+}
+
+#center {
+  float: left;
+  width: ;
+}
+
+.hidden {
+  display: none;
+  white-space: pre;
+}
+
+#ruby-field {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 2em;
+  /*width: 2em;*/
+}
+
+#game-map {
+  height: 25em;
+  background: black;
+  margin-top: 2em;
+}
+
+.text-field {
+  margin-top: .4em;
+  width: 35em;
+  height: 5em;
+  background: black;
+  color: blue;
+  overflow: hidden;
+}
+
+.input-field {
+  margin-top: 5px;
+  width: 160px;
+}
+
+.final-text {
+  position: absolute;
+  top: 8.5em;
+  left: 6.5em;
+  width: 36em;
+  white-space: normal;
+  padding: 12px;
+}
+
+#win-text {
+background: #e7e690;
+}
+
+#lose-text {
+  color: white;
+  background: #1b1b1b;
+}
+
+.ver {
+  color: #E34234;
+}
+
+.och {
+  color: #CC7722;
+}
+
+.cha {
+  color: #bdf030;
+}
+
+.eme {
+  color: #50C878;
+}
+
+.aqu {
+  color: #7FFFD4;
+}
+
+.lav {
+  color: #B57EDC;
+}
+
+.cob {
+  color: #0047AB;
+}
+
+.vio {
+  color: #7F00FF;
+}
+
+.bur {
+  color: #E97451;
+}
+
