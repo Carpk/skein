@@ -120,6 +120,8 @@ $( document ).ready(function() {
     });
   });
 
+  $('#myModal').modal()
+
 
   $(".user-select").click(function(event) {
     event.preventDefault();

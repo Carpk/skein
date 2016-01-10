@@ -1,20 +1,18 @@
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Skein", root_path, class: "navbar-brand" %>
-      <div class="">
-        <ul class="nav navbar-nav">
-          <li><%= link_to "new game", root_path %></li>
-          <li><%= link_to "intro", root_path %></li>
-          <li><%= link_to "about", root_path %></li>
-        </ul>
+      <div class="navbar-header">
+        <%= link_to "Skein", root_path, class: "navbar-brand" %>
       </div>
+      <ul class="nav navbar-nav">
+        <li><%= link_to "new game", root_path, data: {toggle: "modal", target: "#new-game"} %></li>
+        <li><%= link_to "intro", root_path %></li>
+        <li><%= link_to "about", root_path %></li>
+      </ul>
     </div>
   </div>
 </div>
-
 <div class="container">
-
   <div class="row">
     <div class="col-sm-12">
       <div class="row">
@@ -78,21 +76,28 @@
   </div>
 
 
-  <div class="text-field centered"></div>
+  <div class="text-field centered hidden"></div>
 
-  <div class= "input-field">
+  <div class= "input-field hidden">
     <%= form_tag("/welcome", method: "post", id: 'user-input') do %>
       <%= text_field_tag 'direction' %>
     <% end %>
   </div>
 
 
-  <div class="welcome-text centered hidden">
-    <center>Welcome to Skein</center>
-    Skein is a text based adventure game, where you wander around a labyrinth in search of precious Rubies. But dont let the Grue get a hold of you, you will perish if he does!
-    <center>
-      <%= link_to "Okay", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
-    </center>
+  <div id="new-game" class="welcome-text modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 class="modal-title">New Game</h4>
+        <p>Select your difficulty level:</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="win-text" class="hidden final-text">
+    <center></center>
+    Select either north, east, south, or west to wander the labyrinth. You have to collect all the rubies to end the game. But beware, there is a grue that is chasing you. If he walks in on you, the game will be over!
+    <center><%= link_to "Okay", root_path, id: "close-window"%></center>
   </div>
 
   <div id="win-text" class="hidden final-text">
