@@ -1,19 +1,43 @@
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Skein", class: "brand" %>
-
-      <div class="nav_collapse collapse">
-        <ul class="nav">
-          <li><%= link_to "start" %></li>
-          <li><%= link_to "intro" %></li>
+      <%= link_to "Skein", root_path, class: "navbar-brand" %>
+      <div class="">
+        <ul class="nav navbar-nav">
+          <li><%= link_to "new game", root_path %></li>
+          <li><%= link_to "intro", root_path %></li>
+          <li><%= link_to "about", root_path %></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
 
-<div class="container centered">
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 box"></div>
+        <div class="col-sm-4 box inventory"></div>
+      </div>
+    </div>
+  </div>
 
   <div id="game-map">
     <div id="north">
@@ -37,23 +61,33 @@
     </div>
   </div>
 
-  <div class="text-field centered"></div>
-
-  <div>
-    <%= link_to("North", welcome_index_path("north"), class: "user-select")%>
-    <%= link_to("East", welcome_index_path, class: "user-select")%>
-    <%= link_to("South", welcome_index_path, class: "user-select")%>
-    <%= link_to("West", welcome_index_path, class: "user-select")%>
+  <div class="row">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
+      <div class="row">
+        <%= link_to("North", welcome_index_path, class: "user-select col-sm-2 btn")%>
+        <div class="col-sm-1"></div>
+        <%= link_to("East", welcome_index_path, class: "user-select col-sm-2 btn")%>
+        <div class="col-sm-1"></div>
+        <%= link_to("South", welcome_index_path, class: "user-select col-sm-2 btn")%>
+        <div class="col-sm-1"></div>
+        <%= link_to("West", welcome_index_path, class: "user-select col-sm-2 btn")%>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
   </div>
 
-  <div class= "input-field centered">
+
+  <div class="text-field centered"></div>
+
+  <div class= "input-field">
     <%= form_tag("/welcome", method: "post", id: 'user-input') do %>
       <%= text_field_tag 'direction' %>
     <% end %>
   </div>
 
 
-  <div class="welcome-text centered">
+  <div class="welcome-text centered hidden">
     <center>Welcome to Skein</center>
     Skein is a text based adventure game, where you wander around a labyrinth in search of precious Rubies. But dont let the Grue get a hold of you, you will perish if he does!
     <center>
