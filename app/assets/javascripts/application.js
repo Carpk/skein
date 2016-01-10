@@ -120,6 +120,18 @@ $( document ).ready(function() {
     });
   });
 
+
+  $(".user-select").click(function(event) {
+    event.preventDefault();
+    console.info(event.target.innerText)
+    userInput = event.target.innerText
+
+    if (gameData.game.progress) {
+      progressGame();
+    }
+  })
+
+
   $("#user-input").submit(function(event) {
     event.preventDefault();
     rawInput = $("#user-input").serializeArray();

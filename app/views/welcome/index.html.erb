@@ -1,3 +1,18 @@
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <%= link_to "Skein", class: "brand" %>
+
+      <div class="nav_collapse collapse">
+        <ul class="nav">
+          <li><%= link_to "start" %></li>
+          <li><%= link_to "intro" %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container centered">
 
   <div id="game-map">
@@ -6,15 +21,15 @@
     <div id="west">
     </div>
     <div id="center">
-      <span class="hidden" id="aquamarine"><%= render partial: "shared/aquamarine" %></span>
-      <span class="hidden" id="chartreuse"><%= render partial: "shared/chartreuse" %></span>
-      <span class="hidden" id="cobalt"><%= render partial: "shared/cobalt" %></span>
-      <span class="hidden" id="emerald"><%= render partial: "shared/emerald" %></span>
-      <span class="hidden" id="lavender"><%= render partial: "shared/lavender" %></span>
-      <span class="hidden" id="ochre"><%= render partial: "shared/ochre" %></span>
-      <span class="hidden" id="burnt_sienna"><%= render partial: "shared/sienna" %></span>
-      <span class="hidden" id="vermillion"><%= render partial: "shared/vermillion" %></span>
-      <span class="hidden" id="violet"><%= render partial: "shared/violet" %></span>
+      <span class="hidden"><%= render partial: "shared/aquamarine" %></span>
+      <span class="hidden"><%= render partial: "shared/chartreuse" %></span>
+      <span class="hidden"><%= render partial: "shared/cobalt" %></span>
+      <span class="hidden"><%= render partial: "shared/emerald" %></span>
+      <span class="hidden"><%= render partial: "shared/lavender" %></span>
+      <span class="hidden"><%= render partial: "shared/ochre" %></span>
+      <span class="hidden"><%= render partial: "shared/sienna" %></span>
+      <span class="hidden"><%= render partial: "shared/vermillion" %></span>
+      <span class="hidden"><%= render partial: "shared/violet" %></span>
     </div>
     <div id="east"></div>
     <div id="south">
@@ -22,9 +37,13 @@
     </div>
   </div>
 
+  <div class="text-field centered"></div>
 
-  <div class="text-field centered">
-
+  <div>
+    <%= link_to("North", welcome_index_path("north"), class: "user-select")%>
+    <%= link_to("East", welcome_index_path, class: "user-select")%>
+    <%= link_to("South", welcome_index_path, class: "user-select")%>
+    <%= link_to("West", welcome_index_path, class: "user-select")%>
   </div>
 
   <div class= "input-field centered">
@@ -33,11 +52,12 @@
     <% end %>
   </div>
 
+
   <div class="welcome-text centered">
     <center>Welcome to Skein</center>
     Skein is a text based adventure game, where you wander around a labyrinth in search of precious Rubies. But dont let the Grue get a hold of you, you will perish if he does!
     <center>
-      <%= link_to "Play Game", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
+      <%= link_to "Okay", new_welcome_path, class: "game-button",form: { "data-type" => "json" } %>
     </center>
   </div>
 
