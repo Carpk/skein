@@ -24,7 +24,7 @@ class Labyrinth
     @game.ruby_chance
     @game.grue_possible_move
     @game.check_rubies
-    @game.grue_possible_win # check if grue moved in on player
+    @game.grue_possible_win
 
     player_data = @game.hash_player_data
     grue_data = @game.hash_grue_data

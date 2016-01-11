@@ -68,7 +68,7 @@ $( document ).ready(function() {
   };
 
   function addRuby() {
-    $("#ruby-field").html("Rubies = " + gameData.player.rubies);
+    $("#inventory").html("Rubies = " + gameData.player.rubies);
     $(".text-field").append( "<span id=" + idNum + ">You found a Ruby!<br></span>");
     fadeOutId();
     rubyCount ++
@@ -127,7 +127,7 @@ $( document ).ready(function() {
   $(".user-select").click(function(event) {
     event.preventDefault();
     console.info(event.target.innerText)
-    userInput = event.target.innerText
+    userInput = event.target.innerText.toLowerCase()
 
     if (gameData.game.progress) {
       progressGame();
