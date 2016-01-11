@@ -82,7 +82,7 @@ $( document ).ready(function() {
   function setRoomColor(room) {
     $('#game-map').removeClass();
     $('#game-map').addClass(room);
-    $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
+    // $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
   };
 
   function fadeOutId() {
@@ -107,7 +107,8 @@ $( document ).ready(function() {
 
   $(".game-button").click(function(e) {
     e.preventDefault()
-    $(".welcome-text").fadeOut("fast")
+    // $(".welcome-text").fadeOut("fast")
+    $('#new-game').modal('hide')
     $.get( "/welcome/new", function(data) {
 
       gameData = data
@@ -120,7 +121,7 @@ $( document ).ready(function() {
     });
   });
 
-  $('#myModal').modal()
+
 
 
   $(".user-select").click(function(event) {
@@ -149,5 +150,4 @@ $( document ).ready(function() {
     event.preventDefault();
     location.reload();
   })
-
 });
