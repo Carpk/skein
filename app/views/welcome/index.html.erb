@@ -22,7 +22,17 @@
       </div>
       <div class="row">
         <div class="col-sm-4 box"></div>
-        <div class="col-sm-4 box"></div>
+        <div class="col-sm-4 box">
+          <span class="hidden"><%= render partial: "shared/aquamarine" %></span>
+          <span class="hidden"><%= render partial: "shared/chartreuse" %></span>
+          <span class="hidden"><%= render partial: "shared/cobalt" %></span>
+          <span class="hidden"><%= render partial: "shared/emerald" %></span>
+          <span class="hidden"><%= render partial: "shared/lavender" %></span>
+          <span class="hidden"><%= render partial: "shared/ochre" %></span>
+          <span class="hidden"><%= render partial: "shared/sienna" %></span>
+          <span class="hidden"><%= render partial: "shared/vermillion" %></span>
+          <span class="hidden"><%= render partial: "shared/violet" %></span>
+        </div>
         <div class="col-sm-4 box"></div>
       </div>
       <div class="row">
@@ -37,7 +47,7 @@
     </div>
   </div>
 
-  <div id="game-map">
+<!--   <div id="game-map">
     <div id="north">
     </div>
     <div id="west">
@@ -57,7 +67,7 @@
     <div id="south">
       <div id="ruby-field"></div>
     </div>
-  </div>
+  </div> -->
 
   <div class="row">
     <div class="col-sm-1"></div>
@@ -74,15 +84,6 @@
     </div>
     <div class="col-sm-1"></div>
   </div>
-
-
-  <div class="text-field centered hidden"></div>
-  <div class= "input-field hidden">
-    <%= form_tag("/welcome", method: "post", id: 'user-input') do %>
-      <%= text_field_tag 'direction' %>
-    <% end %>
-  </div>
-
 
   <div id="new-game" class="modal" role="dialog">
     <div class="modal-dialog">
@@ -107,26 +108,27 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <h4 class="modal-title">About</h4>
-        <p>Skein</p>
+        <p>Skein is a Ruby on Rails application. Selecting a button will make a ajax request to the  server, where game play is wrtten in Ruby. Color theme UI is built with Bootstra386.</p>
       </div>
     </div>
   </div>
-  <div id="win-text" class="hidden final-text">
-    <center></center>
-    Select either north, east, south, or west to wander the labyrinth. You have to collect all the rubies to end the game. But beware, there is a grue that is chasing you. If he walks in on you, the game will be over!
-    <center><%= link_to "Okay", root_path, id: "close-window"%></center>
+
+  <div id="win-text" class="modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 class="modal-title">You won!</h4>
+        <p>You have successfully evaded the Grue, and collected your Rubies. Are you willing to test your luck once again?</p>
+      </div>
+    </div>
   </div>
 
-  <div id="win-text" class="hidden final-text">
-    <center>You win!</center>
-    You have successfully evaded the Grue, and collected your Rubies. Are you willing to test your luck once again?
-    <center><a href="" id="replay">Play Again</a></center>
-  </div>
-
-  <div id="lose-text" class="hidden final-text">
-    <center>Game over</center>
-    As you were deciding which door to try next, the Grue entered the room and devoured you.
-    <center><a href="" id="replay">Play Again</a></center>
+  <div id="lose-text" class="modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h4 class="modal-title">Game over!</h4>
+        <p>The Grue has devoured you.</p>
+      </div>
+    </div>
   </div>
 
 </div>

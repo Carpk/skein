@@ -61,9 +61,11 @@ $( document ).ready(function() {
 
   function gameOverText() {
     if (gameData.game.win) {
-      $("#win-text").show();
+      // $("#win-text").show();
+      $('#win-text').modal('show')
     } else {
-      $("#lose-text").show();
+      // $("#lose-text").show();
+      $('#lose-text').modal('show')
     }
   };
 
@@ -135,16 +137,16 @@ $( document ).ready(function() {
   })
 
 
-  $("#user-input").submit(function(event) {
-    event.preventDefault();
-    rawInput = $("#user-input").serializeArray();
-    userInput = rawInput[2].value
-    document.getElementById("user-input").reset();
+  // $("#user-input").submit(function(event) {
+  //   event.preventDefault();
+  //   rawInput = $("#user-input").serializeArray();
+  //   userInput = rawInput[2].value
+  //   document.getElementById("user-input").reset();
 
-    if (gameData.game.progress) {
-      progressGame();
-    }
-  });
+  //   if (gameData.game.progress) {
+  //     progressGame();
+  //   }
+  // });
 
   $("#replay").click(function(event) {
     event.preventDefault();
