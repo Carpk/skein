@@ -61,13 +61,19 @@ $( document ).ready(function() {
 
   function gameOverText() {
     if (gameData.game.win) {
-      // $("#win-text").show();
       $('#win-text').modal('show')
     } else {
-      // $("#lose-text").show();
       $('#lose-text').modal('show')
     }
   };
+
+  $('#win-text').on('hidden.bs.modal', function () {
+   location.reload();
+  })
+
+  $('#lose-text').on('hidden.bs.modal', function () {
+   location.reload();
+  })
 
   function addRuby() {
     $("#inventory").html("Rubies = " + gameData.player.rubies);
@@ -84,7 +90,6 @@ $( document ).ready(function() {
   function setRoomColor(room) {
     $('#game-map').removeClass();
     $('#game-map').addClass(room);
-    // $('html').css({'background-image': 'url(assets/d-' + room + '.jpg)'});
   };
 
   function fadeOutId() {
@@ -98,18 +103,19 @@ $( document ).ready(function() {
   };
 
   function showMap(location) {
-    $( ".hidden" ).hide();
-    $( "#" + location).show();
+    $( ".rooms" ).addClass("hidden");
+    console.info(location)
+    $( "#" + location).removeClass("hidden");
   }
 
   function movementDirections() {
-    $(".text-field").append( "<span id='directions' >To move, please type <em>north</em>, <em>east</em>, <em>south</em>, or <em>west</em><br></span>");
+    $(".text-field").append( "<span id='directions' >To move, select <em>north</em>, <em>east</em>, <em>south</em>, or <em>west</em><br></span>");
     $( "#directions" ).fadeOut( 16200 );
   };
 
   $(".game-button").click(function(e) {
     e.preventDefault()
-    // $(".welcome-text").fadeOut("fast")
+
     $('#new-game').modal('hide')
     $.get( "/welcome/new", function(data) {
 
@@ -128,7 +134,6 @@ $( document ).ready(function() {
 
   $(".user-select").click(function(event) {
     event.preventDefault();
-    console.info(event.target.innerText)
     userInput = event.target.innerText.toLowerCase()
 
     if (gameData.game.progress) {
