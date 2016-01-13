@@ -20,6 +20,8 @@ $( document ).ready(function() {
   var idNum = 0
   var rubyCount = 0
 
+  $( ".rooms" ).addClass("hidden");
+
   function progressGame() {
     $(".text-field").append( "<span id=" + idNum + ">" + userInput + "<br></span>");
     fadeOutId();
