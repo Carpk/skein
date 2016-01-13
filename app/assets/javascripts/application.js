@@ -85,7 +85,7 @@ $( document ).ready(function() {
   };
 
   function invalidResponse() {
-    $(".text-field").append( "<span id=" + idNum + ">Please choose a valid direction. (north, east, south, west)<br></span>");
+    $(".text-field").append( "<span id=" + idNum + ">Please choose a valid direction<br></span>");
     fadeOutId();
   };
 
