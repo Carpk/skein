@@ -129,9 +129,12 @@ $( document ).ready(function() {
 
       setRoomColor(room);
     });
+  })
+
+  $(".navbar-brand").click(function(e) {
+    e.preventDefault()
+    location.reload();
   });
-
-
 
 
   $(".user-select").click(function(event) {
@@ -142,18 +145,6 @@ $( document ).ready(function() {
       progressGame();
     }
   })
-
-
-  // $("#user-input").submit(function(event) {
-  //   event.preventDefault();
-  //   rawInput = $("#user-input").serializeArray();
-  //   userInput = rawInput[2].value
-  //   document.getElementById("user-input").reset();
-
-  //   if (gameData.game.progress) {
-  //     progressGame();
-  //   }
-  // });
 
   $("#replay").click(function(event) {
     event.preventDefault();
