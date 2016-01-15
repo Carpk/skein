@@ -11,7 +11,7 @@ class Player
   end
 
   def sufficient_rubies?
-    @rubies >= 5
+    @rubies >= GameSettings::MaxRubies
   end
 
   def move(direction)

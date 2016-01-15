@@ -46,7 +46,8 @@ class GamePlay
   end
 
   def win_ruby?
-    rand(2..4) == 3
+    chance = GameSettings::RubyWinChance
+    rand(2..chance) == 3
   end
 
   def issue_ruby
@@ -71,7 +72,7 @@ class GamePlay
   end
 
   def check_rubies
-    if num_of_rubies > 2
+    if num_of_rubies > GameSettings::MaxRubies
       @directions_hash[:win] = true
       end_game
     end

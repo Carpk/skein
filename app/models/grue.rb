@@ -7,11 +7,11 @@ class Grue
   end
 
   def asleep?
-    @sleep_count % 6 != 0
+    @sleep_count % GameSettings::GrueSleepCount != 0
   end
 
   def awake?
-    @sleep_count % 6 == 0
+    @sleep_count % GameSettings::GrueSleepCount == 0
   end
 
   def sleep_turn
