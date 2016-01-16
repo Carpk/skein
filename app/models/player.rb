@@ -10,6 +10,10 @@ class Player
     @rubies += 1
   end
 
+  def serialize
+    {location: @position, rubies: @rubies}
+  end
+
   def sufficient_rubies?
     @rubies >= GameSettings::MaxRubies
   end

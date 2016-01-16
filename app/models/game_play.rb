@@ -15,9 +15,7 @@ class GamePlay
   end
 
   def hash_player_data
-    player_location = current_room
-    rubies = num_of_rubies
-    {location: player_location, rubies: rubies}
+    @player.serialize
   end
 
   def move_player
@@ -72,7 +70,7 @@ class GamePlay
   end
 
   def check_rubies
-    if num_of_rubies > GameSettings::MaxRubies
+    if @player.sufficient_rubies?
       @directions_hash[:win] = true
       end_game
     end
