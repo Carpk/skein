@@ -50,7 +50,7 @@ $( document ).ready(function() {
   }
 
   function sendData() {
-    $.post( "/welcome", gameData, function(data) {
+    $.post( "/game", gameData, function(data) {
       setTimeout(function() {
         gameData = data
         promptText(data.player.location);
@@ -119,7 +119,7 @@ $( document ).ready(function() {
     e.preventDefault()
 
     $('#new-game').modal('hide')
-    $.get( "/welcome/new", function(data) {
+    $.get( "/game/new", function(data) {
 
       gameData = data
       movementDirections();
