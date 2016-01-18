@@ -7,7 +7,6 @@ class GameController < ApplicationController
   end
 
   def create
-    p params
     game = Labyrinth.new(params)
     data = game.take_turn
 

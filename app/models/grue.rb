@@ -18,12 +18,16 @@ class Grue
     @sleep_count += 1
   end
 
-  def move_to(player)
-    @position = Compass.move_to_target(@position, player)
+  def to_h
+    {location: @position, sleep: @sleep_count}
   end
 
-  def found_player?(player)
-    @position == player
+  def move_to(room)
+    @position = Compass.move_to_target(@position, room)
+  end
+
+  def found_player?(room)
+    @position == room
   end
 
   def flee_room

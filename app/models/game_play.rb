@@ -10,12 +10,8 @@ class GamePlay
     @player.position
   end
 
-  def num_of_rubies
-    @player.rubies
-  end
-
   def hash_player_data
-    @player.serialize
+    @player.to_h
   end
 
   def move_player
@@ -23,16 +19,8 @@ class GamePlay
     @player.move(direction)
   end
 
-  def grue_location
-    @grue.position
-  end
-
-  def grue_sleep_count
-    @grue.sleep_count
-  end
-
   def hash_grue_data
-    {location: grue_location, sleep: grue_sleep_count}
+    @grue.to_h
   end
 
   def hash_game_data
@@ -40,6 +28,7 @@ class GamePlay
     exit = @directions_hash[:exit]
     progress =  @directions_hash[:progress]
     win =  @directions_hash[:win]
+
     {routes: routes, exit: exit, progress: progress, win: win }
   end
 
@@ -52,7 +41,7 @@ class GamePlay
     @player.collect_ruby
   end
 
-  def ruby_chance
+  def win_ruby_chance
     if win_ruby?
       issue_ruby
     end
@@ -84,7 +73,7 @@ class GamePlay
     @grue.flee_room
   end
 
-  def grue_possible_flee
+  def grue_flee_possibility
     if grue_in_room?
       grue_flee_room
     end

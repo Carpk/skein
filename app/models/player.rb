@@ -10,7 +10,7 @@ class Player
     @rubies += 1
   end
 
-  def serialize
+  def to_h
     {location: @position, rubies: @rubies}
   end
 
