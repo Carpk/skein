@@ -18542,6 +18542,17 @@ button.close {
  */
 
 
+@font-face {
+    font-family: 'Fixedsys500c';
+    src: url(/assets/Fixedsys500c.eot);
+    src: url(/assets/Fixedsys500c.eot?#iefix) format('embedded-opentype'),
+         url(/assets/Fixedsys500c.woff) format('woff'),
+         url(/assets/Fixedsys500c.ttf) format('truetype'),
+         url(/assets/Fixedsys500c.svg#akagithin) format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
 body {
   padding-top: 60px;
 }
